@@ -1,0 +1,31 @@
+#!/bin/bash
+
+function abspath {
+    if [[ -d "$1" ]]
+    then
+        pushd "$1" >/dev/null
+        pwd -P
+  popd >/dev/null
+    elif [[ -e $1 ]]
+    then
+        pushd $(dirname $1) >/dev/null
+        echo $(pwd -P)/$(basename $1)
+        popd >/dev/null
+    else
+        echo $1 does not exist! >&2
+        return 127
+    fi
+}
+
+
+ARGS=$@
+CURRDIR=$(dirname $0)
+ABSDIR=$(abspath $CURRDIR)
+
+ROOT_DIR=$(abspath "${CURRDIR}/../")
+echo "IN MANAGE"
+echo ${ROOT_DIR}
+
+pushd $ROOT_DIR 2>&1 2>/dev/null 1>/dev/null
+exec $ABSDIR/python $ROOT_DIR/apps/manage.py $ARGS
+popd

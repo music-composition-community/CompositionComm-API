@@ -1,0 +1,11 @@
+d*.py[co]
+*.egg-info
+/lib
+/dist
+/include
+/share
+.Python
+pip-selfcheck.json
+.DS_Store
+__pycache__
+*.pyc
