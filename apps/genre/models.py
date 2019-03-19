@@ -13,4 +13,4 @@ class Genre(models.Model):
         db_table = 'genre'
 
     def __str__(self):
-        return "<Genre %s>" % self.slug
+        return "<Genre 2 %s>" % self.slug

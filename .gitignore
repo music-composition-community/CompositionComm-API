@@ -1,7 +1,7 @@
-d*.py[co]
+*.py[co]
 *.egg-info
+/bin
 /lib
-/dist
 /include
 /share
 .Python
