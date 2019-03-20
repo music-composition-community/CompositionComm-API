@@ -7,6 +7,7 @@ from .localization import *  # noqa
 from .middleware import *  # noqa
 from .paths import *  # noqa
 from .secret_keys import *  # noqa
+from .spotify import *  # noqa
 from .templates import *  # noqa
 from .urls import *  # noqa
 from .wsgi import *  # noqa
