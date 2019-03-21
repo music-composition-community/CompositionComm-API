@@ -7,6 +7,9 @@ from spotify.api import spotify_request
 
 
 class TestRun(TestCase):
-    def test_get_music(self):
-        results = spotify_request.search(q='weezer', limit=20)
-        results.create_models()
+
+    def test_search_for_artist(self):
+        artists = spotify_request.get_artist('0oSGxfWSnnOXhD2fKuz2Gy')
+        print(artists)
+        artists = spotify_request.get_artist('0oSGxfWSnnOXhD2fKuz2Gy', extension='related-artists')
+        print(artists)

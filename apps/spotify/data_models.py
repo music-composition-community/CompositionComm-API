@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
 
+from dacite import from_dict
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -13,7 +14,15 @@ __all__ = ('SpotifyTracks', 'SpotifyTrack', )
 
 
 @dataclass
-class SpotifyImage:
+class CompDataClass:
+
+    @classmethod
+    def from_dict(cls, data):
+        return from_dict(data_class=cls, data=data)
+
+
+@dataclass
+class SpotifyImage(CompDataClass):
     url: str
     width: int
     height: int
@@ -26,13 +35,16 @@ class SpotifyImage:
 
 
 @dataclass
-class SpotifyArtist:
+class SpotifyItem(CompDataClass):
     id: str
     name: str
-
-    external_urls: dict
     uri: str
     href: str
+    external_urls: dict
+
+
+@dataclass
+class SpotifyArtist(SpotifyItem):
 
     type: str = 'artist'
 
@@ -44,13 +56,7 @@ class SpotifyArtist:
 
 
 @dataclass
-class SpotifyAlbum:
-    id: str
-    name: str
-
-    uri: str
-    href: str
-    external_urls: dict
+class SpotifyAlbum(SpotifyItem):
 
     release_date: str
     release_date_precision: str
@@ -71,15 +77,10 @@ class SpotifyAlbum:
 
 
 @dataclass
-class SpotifyTrack:
-    id: str
-    name: str
+class SpotifyTrack(SpotifyItem):
 
-    preview_url: Optional[str]  # TODO: Map to URL
-    href: str  # TODO: Map to URL
-    uri: str  # TODO: Map to URL
-    external_ids: dict  # Probably don't need this
-    external_urls: dict  # Probably don't need this
+    preview_url: Optional[str]
+    external_ids: dict
 
     album: SpotifyAlbum
     artists: List[SpotifyArtist]
@@ -112,7 +113,7 @@ class SpotifyTrack:
 
 
 @dataclass
-class SpotifyTracks:
+class SpotifyTracks(CompDataClass):
     items: List[SpotifyTrack]
 
     def create_models(self):
