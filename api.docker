@@ -2,8 +2,13 @@
 FROM python:3.6-slim
 
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /api
 
+# Will probably have to change this to be more restrictive.
+# The --gecos parameter is used to set the additional information.
+# In this case it is just empty.
+RUN adduser --disabled-password --gecos '' apiuser
+
+RUN mkdir /api
 WORKDIR /api
 
 # Create /api Directory Inside Docker Image

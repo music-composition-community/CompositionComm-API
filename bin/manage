@@ -26,3 +26,4 @@ ROOT_DIR=$(abspath "${CURRDIR}/../")
 
 pushd $ROOT_DIR 2>&1 2>/dev/null 1>/dev/null
 exec $ABSDIR/python $ROOT_DIR/apps/manage.py $ARGS
+popd

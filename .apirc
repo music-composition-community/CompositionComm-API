@@ -1,0 +1,11 @@
+. /etc/profile
+
+if [ -f ~/.bash_profile ]; then
+    . ~/.bash_profile
+fi
+
+if [ -e /www/api/bin/activate ]; then
+    . /www/api/bin/activate
+fi
+
+export PATH=~/bin:$PATH
